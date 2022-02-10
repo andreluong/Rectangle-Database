@@ -15,14 +15,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => res.render('pages/index'));
-app.get('/database', async (req,res) => {
-  try {
-    const result = await SecurityPolicyViolationEvent.query(`SELECT * FROM users`);
-    const data = { results : result.rows };
-    res.render('pages/db', data);
-  } catch (error) {
-    res.end(error);
-  }
+app.get('/database', (req,res) => {
+  var getUsersQuery = `SELECT * FROM usr`;
+  pool.query(getUsersQuery, (error,result) => {
+    if (error) 
+      res.end(error);
+    var results = {'rows':result.rows};
+    res.render('pages/db',results);
+  });
+
 });
 app.post('/adduser', (req,res) => {
   console.log("post request for /adduser");
