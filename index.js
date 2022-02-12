@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => res.render('pages/index'));
 
-app.get('/database', async (req,res) => {
+app.get('/database', (req,res) => {
   try {
       const result = await SecurityPolicyViolationEvent.query(`SELECT * FROM rectangle`);
       const data = { results : result.rows };
