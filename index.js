@@ -27,7 +27,7 @@ app.get('/database', (req,res) => {
   //   // data = {results : result.rows};
   //   res.render('pages/db',results); 
   // })
-  res.render('pages/db',results); 
+  res.render('pages/db'); 
 });
 
 // app.post('/adduser', (req,res) => {
