@@ -1,3 +1,4 @@
+import dotenv from 'dotenv/config';
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
@@ -16,7 +17,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => res.render('pages/index'));
 
-app.get('/databaser', (req,res) => {
+app.get('/database', (req,res) => {
   var getUsersQuery = `SELECT * FROM rectangle`;
   pool.query(getUsersQuery, (error,result) => {
     if (error) 
