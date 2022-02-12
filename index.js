@@ -6,7 +6,7 @@ const { Pool } = require('pg');
 var pool;
 pool = new Pool({
   connectionString: process.env.DATABASE_URL
-});
+})
 
 var app = express();
 app.use(express.json());
@@ -20,14 +20,15 @@ app.get('/', (req, res) => res.render('pages/index'));
 app.get('/database', (req,res) => {
   var getUsersQuery = `SELECT * FROM rectangle;`;
   pool.query(getUsersQuery, (error,result) => {
-    if (error) 
+    if (error) {
       res.end(error);
-    // var results = {'rows':result.rows};
-    data = {results : result.rows};
-    res.render('pages/db',data); 
+    }
+    var results = {'rows':result.rows}
+    // data = {results : result.rows};
+    res.render('pages/db',results); 
   })
-  
-})
+
+});
 
 // app.post('/adduser', (req,res) => {
 //   console.log("post request for /adduser");
