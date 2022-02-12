@@ -21,7 +21,7 @@ app.get('/database', (req,res) => {
   pool.query(getUsersQuery, (error,result) => {
     if (error) 
       res.end(error);
-    var results = {'rows':result.rows};
+    // var results = {'rows':result.rows};
     res.render('pages/db',results); 
   });
 
