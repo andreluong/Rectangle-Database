@@ -25,9 +25,9 @@ app.get('/database', (req,res) => {
     // var results = {'rows':result.rows};
     data = {results : result.rows};
     res.render('pages/db',data); 
-  });
-
-});
+  })
+  
+})
 
 // app.post('/adduser', (req,res) => {
 //   console.log("post request for /adduser");
