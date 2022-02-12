@@ -1,10 +1,10 @@
-import dotenv from 'dotenv/config';
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
 const { Pool } = require('pg');
-var pool = new Pool({
+var pool;
+pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
