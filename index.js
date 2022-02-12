@@ -17,16 +17,15 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => res.render('pages/index'));
 
-app.get('/database', (req,res) => {
-  var getUsersQuery = `SELECT * FROM rectangles`;
-  pool.query(getUsersQuery, (error,result) => {
-    if (error) 
+app.get('/database', async (req,res) => {
+  try {
+      const result = await SecurityPolicyViolationEvent.query(`SELECT * FROM rectangle`);
+      const data = { results : result.rows };
+      res.render('pages/db', data);
+  } catch (error) {
       res.end(error);
-    var results = {'rows':result.rows};
-    res.render('pages/db',results);
-  });
+  }
 });
-
 // app.post('/adduser', (req,res) => {
 //   console.log("post request for /adduser");
 //   var username = req.body.username;
