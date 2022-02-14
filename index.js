@@ -35,23 +35,7 @@ app.get('/database', async (req, res) => {
     
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
-
-
-app.get('/add', (req,res) => {
-    // var nameValue = document.querySelector("name").value;
-    // var widthValue = document.querySelector("width").value;
-    // var heightValue = document.querySelector("height").value;
-    // var colourValue = document.querySelector("colour").value;
-
-    // const getAddQuery = `insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})`
-    // pool.query(getAddQuery, (error,result) => {
-    //     if (error) {
-    //         res.send("Error " + err);
-    //     }
-    //     res.render('pages/db');
-    // })
-    res.render('pages/add');
-})
+app.get('/add', (req,res) => res.render('pages/add'))
 
 document.getElementById("form").addEventListener("submit", addRect);
 
