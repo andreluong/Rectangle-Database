@@ -20,12 +20,11 @@ app.get('/', (req, res) => res.render('pages/index'))
 
 app.get('/database', (req,res) => {
     // var getUsersQuery = 'SELECT * FROM usr;';
-    pool.query(`SELECT * FROM usr;`, (error,result) => {
+    pool.query(`SELECT * FROM rect;`, (error,result) => {
         if(error) {
             res.send(error);
         }  
-        var results1 = {'rows': result.rows};
-        var results = JSON.stringify(results1);
+        var results = {'rows': result.rows};
         res.render('pages/db', results);
     })
     // res.render('pages/db');
