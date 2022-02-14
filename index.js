@@ -6,7 +6,7 @@ var app = express()
 
 const { Pool } = require('pg');
 var pool = new Pool({
-    connectionString: process.env.DATABASE_URL || "postgres://postgres:824807@localhost/users"
+    connectionString: process.env.DATABASE_URL || 'postgres://postgres:824807@localhost/users'
 })
   
 app.use(express.static(path.join(__dirname, 'public')))
@@ -19,14 +19,14 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => res.render('pages/index'))
 
 app.get('/database', (req,res)=>{
-    // var getUsersQuery = 'SELECT * FROM usr';
-    // pool.query(getUsersQuery, (error,result) => {
-    //     if(error)
-    //         res.end(error);
-    //     data = {results : result.rows}; //array of rows
-    //     res.render('pages/db', data);
-    // })
-    res.render('pages/db');
+    // var getUsersQuery = 'SELECT * FROM usr;';
+    pool.query(`SELECT * FROM usr;`, (error,result) => {
+        if(error)
+            res.end(error);
+        data = {results : result.rows}; //array of rows
+        res.render('pages/db', data);
+    })
+    // res.render('pages/db');
 })
     
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
