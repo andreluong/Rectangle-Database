@@ -39,9 +39,11 @@ app.get('/add', (req,res) => res.render('pages/add'))
 
 app.post('/add', (req,res) => {
     var name = req.body.name;
+    var width = req.body.width;
+    var height = req.body.height;
     var colour = req.body.colour;
-    pool.query(`insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})`);
-    res.send(`insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})`);
+    pool.query(`insert into rect values (${name},${width},${height},${colour})`);
+    res.send(`insert into rect values (${name},${width},${height},${colour})`);
 })
 
 // function addRect() {
