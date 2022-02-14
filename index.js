@@ -5,8 +5,11 @@ const PORT = process.env.PORT || 5000
 var app = express()
 
 const { Pool } = require('pg');
-var pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 })
   
 app.use(express.static(path.join(__dirname, 'public')))
@@ -18,17 +21,32 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.render('pages/index'))
 
-app.get('/database', (req,res) => {
-    // var getUsersQuery = 'SELECT * FROM usr;';
-    pool.query(`SELECT * FROM rect;`, (error,result) => {
-        if(error) {
-            res.send(error);
-        }  
-        var results = {'rows': result.rows};
-        res.render('pages/db', results);
-    })
-    // res.render('pages/db');
-})
+// app.get('/database', (req,res) => {
+//     // var getUsersQuery = 'SELECT * FROM usr;';
+//     pool.query(`SELECT * FROM rect;`, (error,result) => {
+//         if(error) {
+//             res.send(error);
+//         }  
+//         var results = {'rows': result.rows};
+//         res.render('pages/db', results);
+//     })
+//     // res.render('pages/db');
+// })
+
+.get('/database', async (req, res) => {
+    try {
+      const client = await pool.connect();
+      const result = await client.query('SELECT * rect');
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('pages/db', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+
+
     
 // app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
