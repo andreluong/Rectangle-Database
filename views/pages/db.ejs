@@ -35,10 +35,9 @@
       </table>
 
       <ul>
-        <% for(var d of data) { %>
-          <li><%= d %></li>
-        <% } %>
-
+        <% results.forEach(function(r) { %>
+          <li><%= r %></li>
+        <% }); %>
       </ul>
 
 

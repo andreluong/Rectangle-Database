@@ -23,8 +23,8 @@ app.get('/database', (req,res)=>{
     pool.query(`SELECT * FROM usr;`, (error,result) => {
         if(error)
             res.end(error);
-        data = {results : result.rows}; //array of rows
-        res.render('pages/db', data);
+        var results = {'rows': result.rows};
+        res.render('pages/db', results);
     })
     // res.render('pages/db');
 })
