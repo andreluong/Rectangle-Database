@@ -20,6 +20,8 @@ app.get('/', (req, res) => res.render('pages/index'))
 
 app.get('/database', (req,res)=>{
     // var getUsersQuery = 'SELECT * FROM usr;';
+    if(error)
+        res.end(error);
     pool.query(`SELECT * FROM usr;`, (error,result) => {
         if(error)
             res.end(error);
@@ -29,9 +31,9 @@ app.get('/database', (req,res)=>{
     // res.render('pages/db');
 })
     
-app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
+// app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
-app.get('/add', (req,res) => res.render('pages/add'))
+// app.get('/add', (req,res) => res.render('pages/add'))
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
