@@ -20,12 +20,10 @@ app.get('/', (req, res) => res.render('pages/index'))
 
 app.get('/database', (req,res) => {
     // var getUsersQuery = 'SELECT * FROM usr;';
-    if(error)
-        throw error;
-        res.end(error);
     pool.query(`SELECT * FROM usr;`, (error,result) => {
-        if(error)
+        if(error) {
             res.end(error);
+        }  
         var results = {'rows': result.rows};
         res.render('pages/db', results);
     })
