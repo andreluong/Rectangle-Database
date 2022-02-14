@@ -21,18 +21,6 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.render('pages/index'))
 
-// app.get('/database', (req,res) => {
-//     // var getUsersQuery = 'SELECT * FROM usr;';
-//     pool.query(`SELECT * FROM rect;`, (error,result) => {
-//         if(error) {
-//             res.send(error);
-//         }  
-//         var results = {'rows': result.rows};
-//         res.render('pages/db', results);
-//     })
-//     // res.render('pages/db');
-// })
-
 app.get('/database', async (req, res) => {
     try {
       const client = await pool.connect();
@@ -48,9 +36,9 @@ app.get('/database', async (req, res) => {
 
 
     
-// app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
+app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
-// app.get('/add', (req,res) => res.render('pages/add'))
+app.get('/add', (req,res) => res.render('pages/add'))
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))

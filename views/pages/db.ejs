@@ -26,6 +26,16 @@
           <th>Colour</th>
         </tr>
         <!-- forEach -->
+
+        <% for (var i = 0; i < results.length; i++) { %>
+          let index = i + 1;
+          <tr>
+            <td>index</td>
+            <td><%= results[i].name %></td>
+            <td><%= results[i].colour %></td>
+          </tr>
+        <% } %>
+
         <tr>
           <td></td>
           <td></td>
@@ -36,7 +46,7 @@
 
       <ul>
         <% results.forEach(function(r) { %>
-          <li><%= r %></li>
+          <li><%= r.name %></li>
         <% }); %>
       </ul>
 
