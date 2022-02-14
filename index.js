@@ -33,7 +33,7 @@ app.get('/', (req, res) => res.render('pages/index'))
 //     // res.render('pages/db');
 // })
 
-.get('/database', async (req, res) => {
+app.get('/database', async (req, res) => {
     try {
       const client = await pool.connect();
       const result = await client.query('SELECT * from rect');
