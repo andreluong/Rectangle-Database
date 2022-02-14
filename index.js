@@ -19,8 +19,7 @@ app.set('view engine', 'ejs')
 app.get('/', (req, res) => res.render('pages/index'))
 
 app.get('/database', (req,res)=>{
-    // let data = { results: [1,2,3,4,5]};
-    // var getUsersQuery = 'SELECT * FROM rectangles';
+    // var getUsersQuery = 'SELECT * FROM usr';
     // pool.query(getUsersQuery, (error,result) => {
     //     if(error)
     //         res.end(error);
@@ -29,30 +28,10 @@ app.get('/database', (req,res)=>{
     // })
     res.render('pages/db');
 })
-
-// app.get('/database', async (req,res)=>{
-//    try {
-//        const result = await pool.query(`SELECT * FROM usr`);
-//        const data = { results : result.rows };
-//        res.render('pages/db', data);
-//    }
-//    catch (error) {
-//         res.end(error);
-//    }
     
-// })
-// app.post('/login', (req,res)=>{
-//     console.log("post to /login")
-//     console.log(req.body)
-//     let un = req.body.uname;
-//     let pw = req.body.pass;
-//     // database?
-//     userPasswordQuery = `SELECT * FROM users WHERE name = '${un}'`;
-//     res.send("got it!")
-// })
-// app.get('/t/:id', (req,res)=>{
-//     console.log(req.params.id);
-//     res.send(`ID: ${req.params.id}`);
-// })
+app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
+
+app.get('/add', (req,res) => res.render('pages/add'))
+
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))

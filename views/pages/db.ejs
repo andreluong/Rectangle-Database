@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <%- include ("../partials/header.ejs") %>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/db.css">
+    <script src="index.js" defer></script>
+    <title>Rectangle Database</title>
+  </head>
 
-<body>
+  <body id="container">
+    
+    <div id="header">
+      <button onclick="window.location.href='/';">Home</button> 
+      <button onclick="window.location.href='/database';">Database</button> 
+      <button onclick="window.location.href='/add';">Add</button> 
+    </div>
 
-<%- include ("../partials/nav.ejs") %>
+    <div id="content">
+      <h2>Database</h2>
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Colour</th>
+        </tr>
+        <!-- forEach -->
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
 
-<div class="container">
-<h2>Database Results</h2>
+      </table>
+    </div>
 
-</div>
-
-</body>
+  </body>
 </html>
