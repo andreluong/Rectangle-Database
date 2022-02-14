@@ -36,7 +36,7 @@ app.get('/', (req, res) => res.render('pages/index'))
 .get('/database', async (req, res) => {
     try {
       const client = await pool.connect();
-      const result = await client.query('SELECT * rect');
+      const result = await client.query('SELECT * from rect');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
       client.release();
