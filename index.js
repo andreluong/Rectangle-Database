@@ -26,7 +26,7 @@ app.get('/database', async (req, res) => {
       const client = await pool.connect();
       const result = await client.query('SELECT * from rect');
       const results = { 'results': (result) ? result.rows : null};
-      res.render('pages/db', results );
+      res.render('pages/db', results);
       client.release();
     } catch (err) {
       res.send("Error " + err);
@@ -44,11 +44,13 @@ function addRect() {
     var colourValue = document.querySelector("colour").value;
 
     const getAddQuery = `insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})`
-    pool.query(getAddQuery, (error,result) => {
+    console.log("insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})");
+    pool.query(getAddQuery, (err,res) => {
         if (error) {
             res.send("Error " + err);
         }
         res.render('pages/db');
+        console.log("rendered pages/db");
     })
 }
 
