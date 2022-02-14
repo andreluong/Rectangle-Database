@@ -31,13 +31,11 @@ app.get('/database', async (req, res) => {
     } catch (err) {
       res.send("Error " + err);
     }
-  })
+})
     
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
 app.get('/add', (req,res) => res.render('pages/add'))
-
-document.getElementById("form").addEventListener("submit", addRect);
 
 function addRect() {
     var nameValue = document.querySelector("name").value;
