@@ -37,6 +37,8 @@ app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
 app.get('/add', (req,res) => res.render('pages/add'))
 
+document.getElementById("form").addEventListener("submit", addRect);
+
 function addRect() {
     var nameValue = document.querySelector("name").value;
     var widthValue = document.querySelector("width").value;
