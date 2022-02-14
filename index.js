@@ -24,7 +24,8 @@ app.get('/database', (req,res) => {
         if(error) {
             res.send(error);
         }  
-        var results = {'rows': result.rows};
+        var results1 = {'rows': result.rows};
+        var results = JSON.stringify(results1);
         res.render('pages/db', results);
     })
     // res.render('pages/db');
