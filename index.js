@@ -18,9 +18,10 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.render('pages/index'))
 
-app.get('/database', (req,res)=>{
+app.get('/database', (req,res) => {
     // var getUsersQuery = 'SELECT * FROM usr;';
     if(error)
+        throw error;
         res.end(error);
     pool.query(`SELECT * FROM usr;`, (error,result) => {
         if(error)
