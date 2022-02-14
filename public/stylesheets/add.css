@@ -1,3 +1,18 @@
+label {
+    font-size: 18px;
+}
+
 input {
     margin-bottom: 10px;
+    padding: 10px;
+}
+
+input[type=submit] {
+    background-color: rgb(42, 42, 42);
+    color: white;
+    border-color: rgb(42, 42, 42);
+    border-radius: 3px;
+    font-size: 15px;
+    padding: 5px;
+    margin-top: 20px;
 }
