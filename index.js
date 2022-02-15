@@ -47,7 +47,6 @@ app.get('/database/:name', async (req,res) => {
 
   // }
 
-
   res.render('pages/rectangle/', {name: req.params.name});
 })
 
@@ -69,10 +68,5 @@ app.post('/add', async (req,res) => {
     res.send("Error " + err);
   }
 })
-
-function redirectTo(name) {
-  res.redirect(`/database/${name}`);
-}
-
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
