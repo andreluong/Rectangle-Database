@@ -46,6 +46,7 @@ app.post('/add', (req,res) => {
       if (error) {
         res.send("Error " + err);
       }
+      console.log(`insert into rect values (${name},${width},${height},${colour})`);
       res.send('Added successfully');
     })
 })
