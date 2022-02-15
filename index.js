@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { redirect } = require('express/lib/response');
 const path = require('path')
 const PORT = process.env.PORT || 5000
 
@@ -38,18 +39,19 @@ app.get('/add', (req,res) => res.render('pages/add'))
 
 
 
-app.post('/add', (req,res) => {
-  var name = document.getElementById("name").value;
-  var width = document.getElementById("width").value;
-  var height = document.getElementById("height").value;
-  var colour = document.getElementById("colour").value;
-  console.log(name);
-  console.log(colour);
-  pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
-    if (err) throw err;
-    // if there are no errors send an OK message.
-    res.send('Saved succesfully');
-  });
+app.post('/add', async (req,res) => {
+  var name = req.body.name;
+  var width = req.body.width;
+  var height = req.body.height;
+  var colour = req.body.colour;
+
+  try {
+    const client = await pool.connect();
+    const result = await client.query(`INSERT INTO rect values (${name},${width},${height},${colour})`);
+    res.redirect('/database');
+  } catch (err) {
+    res.send("Error " + err);
+  }
 })
 
 // document.getElementById('form').addEventListener('submit', addRect);
