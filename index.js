@@ -45,6 +45,13 @@ app.post('/add', async (req,res) => {
   var height = req.body.height;
   var colour = req.body.colour;
 
+  console.log("vars:");
+  console.log(name);
+  console.log(width);
+  console.log(height);
+  console.log(colour);
+  console.log("vars done!")
+
   try {
     const client = await pool.connect();
     await client.query(`INSERT INTO rect VALUES('${name}',${width},${height},'${colour}')`);
