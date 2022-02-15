@@ -35,7 +35,6 @@ app.get('/database', async (req, res) => {
 
 app.get('/database/:name', async (req,res) => {
   var name = req.params.name;
-
   try {
     const client = await pool.connect();
     const result = await client.query(`select * from rect where name='${name}'`)
@@ -44,8 +43,6 @@ app.get('/database/:name', async (req,res) => {
   } catch (err) {
     res.send("Error " + err);
   }
-
-  // res.render('pages/rectangle', {name: req.params.name});
 })
 
 
