@@ -62,12 +62,5 @@ app.post('/add', async (req,res) => {
   }
 })
 
-document.getElementById("delete").addEventListener("click", deleteRect);
-
-function deleteRect() {
-  var name = document.getElementById("name");
-  pool.query(`delete from rect where name='${name}`)
-}
-
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
