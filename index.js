@@ -42,8 +42,12 @@ app.post('/add', (req,res) => {
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
-    pool.query(`insert into rect values (${name},${width},${height},${colour})`);
-    res.send(`insert into rect values (${name},${width},${height},${colour})`);
+    pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
+      if (error) {
+        res.send("Error " + err);
+      }
+      res.send('Added successfully');
+    })
 })
 
 // function addRect() {
