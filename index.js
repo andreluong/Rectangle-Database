@@ -42,7 +42,9 @@ app.post('/add', (req,res) => {
   var width = req.body.width;
   var height = req.body.height;
   var colour = req.body.colour;
-  connection.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
+  console.log(name);
+  console.log(colour);
+  pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
     if (err) throw err;
     // if there are no errors send an OK message.
     res.send('Saved succesfully');
