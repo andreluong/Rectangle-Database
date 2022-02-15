@@ -33,9 +33,7 @@ app.get('/database', async (req, res) => {
 })
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 app.get('/database/:name', (req,res) => {
-  var name = req.params.name;
-  console.log(name);
-  res.render('pages/rectangle', name);
+  res.render('pages/rectangle', {name: req.params.name});
 })
 app.get('/add', (req,res) => res.render('pages/add'))
 
