@@ -66,7 +66,7 @@ function addRect() {
         if (error) {
             res.send("Error " + err);
         }
-        res.render('pages/db');
+        res.redirect("/database")
         console.log("rendered pages/db");
     })
 }
