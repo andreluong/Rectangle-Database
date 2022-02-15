@@ -23,7 +23,7 @@ app.get('/', (req, res) => res.render('pages/index'))
 app.get('/database', async (req, res) => {
     try {
       const client = await pool.connect();
-      const result = await client.query('select * from rect');
+      const result = await client.query(`select * from rect`);
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results);
       client.release();
@@ -32,9 +32,26 @@ app.get('/database', async (req, res) => {
     }
 })
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
-app.get('/database/:name', (req,res) => {
-  res.render('pages/rectangle', {name: req.params.name});
+
+
+app.get('/database/:name', async (req,res) => {
+  var name = req.params.name;
+
+  // try {
+  //   const client = await pool.connect();
+  //   const result = await client.query(`select * from rect where name='${name}'`)
+  //   res.render('pages/rectangle', result);
+  // } catch (err) {
+  //   res.send("Error " + err);
+
+  // }
+
+
+  res.render('pages/rectangle/:name', {name: req.params.name});
 })
+
+
+
 app.get('/add', (req,res) => res.render('pages/add'))
 
 app.post('/add', async (req,res) => {
