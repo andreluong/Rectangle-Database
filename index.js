@@ -33,7 +33,7 @@ app.get('/database', async (req, res) => {
 })
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 app.get('/database/:name', (req,res,next) => {
-  res.render('pages/rectangle', {output: req.params.name});
+  res.render('pages/rectangle', req.params.name);
 })
 app.get('/add', (req,res) => res.render('pages/add'))
 
