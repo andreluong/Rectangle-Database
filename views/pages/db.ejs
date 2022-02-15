@@ -28,7 +28,9 @@
         <% for (var i = 0; i < results.length; i++) { %>
           <tr>
             <td><%= i+1%></td>
-            <td><%= results[i].name %></td>
+            <a href="/pages/rectangle/">
+              <td><%= results[i].name %></td>
+            </a>
             <td><%= results[i].colour %></td>
           </tr>
         <% } %>
