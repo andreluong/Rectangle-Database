@@ -15,12 +15,10 @@ const pool = new Pool({
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
-
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.render('pages/index'))
-
 app.get('/database', async (req, res) => {
     try {
       const client = await pool.connect();
@@ -32,14 +30,13 @@ app.get('/database', async (req, res) => {
       res.send("Error " + err);
     }
 })
-    
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
-
 app.get('/database/:name', (req,res,next) => {
   res.render('pages/rectangle', {output: req.params.name});
 })
-
 app.get('/add', (req,res) => res.render('pages/add'))
+
+
 
 app.post('/add', (req,res) => {
   var name = document.getElementById("name").value;
@@ -53,14 +50,6 @@ app.post('/add', (req,res) => {
     // if there are no errors send an OK message.
     res.send('Saved succesfully');
   });
-  
-  // pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
-  //   if (error) {
-  //     res.send("Error " + err);
-  //   }
-  //   console.log(`insert into rect values (${name},${width},${height},${colour})`);
-  //   res.send('Added successfully');
-  // })
 })
 
 // function addRect() {
