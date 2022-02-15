@@ -47,7 +47,7 @@ app.get('/database/:name', async (req,res) => {
   // }
 
 
-  res.render('pages/rectangle/:name', {name: req.params.name});
+  res.render('pages/rectangle/', {name: req.params.name});
 })
 
 
