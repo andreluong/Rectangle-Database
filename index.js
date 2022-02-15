@@ -54,8 +54,6 @@ app.post('/add', (req,res) => {
 
 document.getElementById('form').addEventListener('submit', addRect);
 
-
-
 function addRect() {
     var nameValue = document.querySelector("name").value;
     var widthValue = document.querySelector("width").value;
