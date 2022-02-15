@@ -34,7 +34,7 @@ app.get('/database', async (req, res) => {
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
 app.get('/database/:name', (req,res) => {
-  var name = req.params.name;
+  // var name = req.params.name;
   // const client = await pool.connect();
   // const result = await client.query(`select * from rect where name='${name}'`);
   // const results = { 'results': (result) ? result.rows : null};
