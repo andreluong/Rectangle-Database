@@ -37,8 +37,6 @@ app.get('/database/:name', (req,res,next) => {
 })
 app.get('/add', (req,res) => res.render('pages/add'))
 
-
-
 app.post('/add', async (req,res) => {
   var name = req.body.name;
   var width = req.body.width;
@@ -47,11 +45,8 @@ app.post('/add', async (req,res) => {
 
   try {
     const client = await pool.connect();
-    await client.query(`INSERT INTO rect VALUES('${name}',${width},${height},'${colour}')`);
+    client.query(`INSERT INTO rect VALUES('${name}',${width},${height},'${colour}')`);
     res.redirect('/database');
-    // const result = await client.query('SELECT * from rect');
-    // const results = { 'results': (result) ? result.rows : null};
-    // res.render('pages/db', results);
   } catch (err) {
     res.send("Error " + err);
   }
