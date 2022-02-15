@@ -52,22 +52,26 @@ app.post('/add', (req,res) => {
   });
 })
 
-// function addRect() {
-//     var nameValue = document.querySelector("name").value;
-//     var widthValue = document.querySelector("width").value;
-//     var heightValue = document.querySelector("height").value;
-//     var colourValue = document.querySelector("colour").value;
+document.getElementById('form').addEventListener('submit', addRect);
 
-//     const getAddQuery = `insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})`
-//     console.log("insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})");
-//     pool.query(getAddQuery, (err,res) => {
-//         if (error) {
-//             res.send("Error " + err);
-//         }
-//         res.render('pages/db');
-//         console.log("rendered pages/db");
-//     })
-// }
+
+
+function addRect() {
+    var nameValue = document.querySelector("name").value;
+    var widthValue = document.querySelector("width").value;
+    var heightValue = document.querySelector("height").value;
+    var colourValue = document.querySelector("colour").value;
+
+    const getAddQuery = `insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})`
+    console.log("insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})");
+    pool.query(getAddQuery, (err,res) => {
+        if (error) {
+            res.send("Error " + err);
+        }
+        res.render('pages/db');
+        console.log("rendered pages/db");
+    })
+}
 
 
 
