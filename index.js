@@ -45,44 +45,17 @@ app.post('/add', async (req,res) => {
   var height = req.body.height;
   var colour = req.body.colour;
 
-  console.log("vars:");
-  console.log(name);
-  console.log(width);
-  console.log(height);
-  console.log(colour);
-  console.log("vars done!")
-
   try {
     const client = await pool.connect();
     await client.query(`INSERT INTO rect VALUES('${name}',${width},${height},'${colour}')`);
-    const result = await client.query('SELECT * from rect');
-    const results = { 'results': (result) ? result.rows : null};
-    res.render('pages/db', results);
+    res.redirect('/database');
+    // const result = await client.query('SELECT * from rect');
+    // const results = { 'results': (result) ? result.rows : null};
+    // res.render('pages/db', results);
   } catch (err) {
     res.send("Error " + err);
   }
 })
-
-// document.getElementById('form').addEventListener('submit', addRect);
-
-// function addRect() {
-//     var nameValue = document.querySelector("name").value;
-//     var widthValue = document.querySelector("width").value;
-//     var heightValue = document.querySelector("height").value;
-//     var colourValue = document.querySelector("colour").value;
-
-//     const getAddQuery = `insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})`
-//     console.log("insert into rect values (${nameValue},${widthValue},${heightValue},${colourValue})");
-//     pool.query(getAddQuery, (err,res) => {
-//         if (error) {
-//             res.send("Error " + err);
-//         }
-//         res.redirect("/database")
-//         console.log("rendered pages/db");
-//     })
-// }
-
-
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
