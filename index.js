@@ -35,7 +35,7 @@ app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
 
 app.get('/database/:name', async (req,res) => {
-  var name = req.params.name;
+  // var name = req.params.name;
 
   // try {
   //   const client = await pool.connect();
