@@ -33,8 +33,9 @@ app.get('/database', async (req, res) => {
 })
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 app.get('/database/:name', (req,res) => {
+  var name = req.params.name;
   const client = await pool.connect();
-  const result = await client.query(`select * from rect where name='${req.params.name}'`);
+  const result = await client.query(`select * from rect where name='${name}'`);
   res.render('pages/rectangle/:name', result);
 })
 app.get('/add', (req,res) => res.render('pages/add'))
