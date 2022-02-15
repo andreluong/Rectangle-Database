@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 const { redirect } = require('express/lib/response');
 const path = require('path')
 const PORT = process.env.PORT || 5000
@@ -68,6 +69,10 @@ app.post('/add', async (req,res) => {
     res.send("Error " + err);
   }
 })
+
+function redirectTo(name) {
+  res.redirect(`/database/${name}`);
+}
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
