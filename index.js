@@ -35,13 +35,17 @@ app.get('/database', async (req, res) => {
     
 app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 
+app.get('/database/:name', (req,res,next) => {
+  res.render('pages/rectangle', {output: req.params.name});
+})
+
 app.get('/add', (req,res) => res.render('pages/add'))
 
 app.post('/add', (req,res) => {
-  var name = req.body.name;
-  var width = req.body.width;
-  var height = req.body.height;
-  var colour = req.body.colour;
+  var name = document.getElementById("name").value;
+  var width = document.getElementById("width").value;
+  var height = document.getElementById("height").value;
+  var colour = document.getElementById("colour").value;
   console.log(name);
   console.log(colour);
   pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
@@ -75,10 +79,6 @@ app.post('/add', (req,res) => {
 //         console.log("rendered pages/db");
 //     })
 // }
-
-app.get('/database/:name', (req,res,next) => {
-  res.render('pages/rectangle', {output: req.params.name});
-})
 
 
 
