@@ -42,14 +42,19 @@ app.post('/add', (req,res) => {
   var width = req.body.width;
   var height = req.body.height;
   var colour = req.body.colour;
-  pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
-    if (error) {
-      res.send("Error " + err);
-    }
-    console.log(`insert into rect values (${name},${width},${height},${colour})`);
-    res.send('Added successfully');
-  })
-  res.redirect('pages/rectangle/' + name);
+  connection.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
+    if (err) throw err;
+    // if there are no errors send an OK message.
+    res.send('Saved succesfully');
+  });
+  
+  // pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
+  //   if (error) {
+  //     res.send("Error " + err);
+  //   }
+  //   console.log(`insert into rect values (${name},${width},${height},${colour})`);
+  //   res.send('Added successfully');
+  // })
 })
 
 // function addRect() {

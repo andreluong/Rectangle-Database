@@ -25,15 +25,17 @@
           <th>Name</th>
           <th>Colour</th>
         </tr>
+
         <% for (var i = 0; i < results.length; i++) { %>
           <tr>
             <td><%= i+1%></td>
-            <a href="google.com">
+            <a href="/pages/rectangle/" + results[i].name>
               <td><%= results[i].name %></td>
             </a>
             <td><%= results[i].colour %></td>
           </tr>
         <% } %>
+        
       </table>
 
     </div>
