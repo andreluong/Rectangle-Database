@@ -47,7 +47,7 @@ app.post('/add', async (req,res) => {
 
   try {
     const client = await pool.connect();
-    const result = await client.query(`INSERT INTO rect VALUES('${name}',${width},${height},'${colour}')`);
+    await client.query(`INSERT INTO rect VALUES('${name}',${width},${height},'${colour}')`);
     // res.redirect('/database');
     const result = await client.query('SELECT * from rect');
     const results = { 'results': (result) ? result.rows : null};
