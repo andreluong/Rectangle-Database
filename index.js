@@ -38,17 +38,18 @@ app.get('/rectangle', (req,res) => res.render('pages/rectangle'))
 app.get('/add', (req,res) => res.render('pages/add'))
 
 app.post('/add', (req,res) => {
-    var name = req.body.name;
-    var width = req.body.width;
-    var height = req.body.height;
-    var colour = req.body.colour;
-    pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
-      if (error) {
-        res.send("Error " + err);
-      }
-      console.log(`insert into rect values (${name},${width},${height},${colour})`);
-      res.send('Added successfully');
-    })
+  var name = req.body.name;
+  var width = req.body.width;
+  var height = req.body.height;
+  var colour = req.body.colour;
+  pool.query(`insert into rect values (${name},${width},${height},${colour})`, (err, res) => {
+    if (error) {
+      res.send("Error " + err);
+    }
+    console.log(`insert into rect values (${name},${width},${height},${colour})`);
+    res.send('Added successfully');
+  })
+  res.redirect('pages/rectangle/' + name);
 })
 
 // function addRect() {
@@ -67,6 +68,12 @@ app.post('/add', (req,res) => {
 //         console.log("rendered pages/db");
 //     })
 // }
+
+app.get('/database/:name', (req,res,next) => {
+  res.render('pages/rectangle', {output: req.params.name});
+})
+
+
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
