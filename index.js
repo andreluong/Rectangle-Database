@@ -57,7 +57,7 @@ app.post('/database/:name', async (req,res) => {
       res.send("Error " + err);
     }
   } else {
-    res.redirect(`/edit/:${name}`);
+    res.redirect(`/edit/${name}`);
   }
 })
 
@@ -78,7 +78,7 @@ app.post('/add', async (req,res) => {
   }
 })
 
-app.get('/edit/', async (req,res) => {
+app.get('/edit/:name', async (req,res) => {
   var name = req.params.name;
   try {
     const client = await pool.connect();
