@@ -79,8 +79,8 @@ app.post('/add', async (req,res) => {
 })
 
 app.get('/edit/:name', async (req,res) => {
-  var name = req.params.name;
   try {
+    var name = req.params.name;
     const client = await pool.connect();
     const result = await client.query(`select * from rect where name='${name}'`)
     const results = {'results': (result) ? result.rows : null};
@@ -91,12 +91,22 @@ app.get('/edit/:name', async (req,res) => {
 })
 
 
-app.post('/edit', (req,res) => {
-  var name = req.body.name;
-  var width = req.body.width;
-  var height = req.body.height;
-  var colour = req.body.colour; 
-  res.redirect('/database');
+app.post('/edit/:name', async (req,res) => {
+  try {
+    var oldName = req.params.name;
+    var name = req.body.name;
+    var width = req.body.width;
+    var height = req.body.height;
+    var colour = req.body.colour;
+
+    const client = await pool.connect();
+    const updateQuery = `update rect set name='${name}', width=${width},
+      height=${height}, colour='${colour}' where name='${oldName}'`
+    await client.query(updateQuery);
+    res.redirect('/database');
+  } catch (err) {
+    res.send("Error " + err);
+  }
 })
 
 
