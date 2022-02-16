@@ -45,15 +45,25 @@ app.get('/database/:name', async (req,res) => {
   }
 })
 
+
+
 app.post('/database/:name', async (req,res) => {
-  var name = req.params.name;
-  try {
-    const client = await pool.connect();
-    client.query(`delete from rect where name='${name}'`);
+  var buttonValue = req.body.vote;
+
+  if (buttonValue == "delete") {
+    var name = req.params.name;
+    try {
+      const client = await pool.connect();
+      client.query(`delete from rect where name='${name}'`);
+      res.redirect('/database');
+    } catch (err) {
+      res.send("Error " + err);
+    }
+  } else {
     res.redirect('/database');
-  } catch (err) {
-    res.send("Error " + err);
   }
+
+  
 })
 
 app.get('/add', (req,res) => res.render('pages/add'))
@@ -72,5 +82,6 @@ app.post('/add', async (req,res) => {
     res.send("Error " + err);
   }
 })
+
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
