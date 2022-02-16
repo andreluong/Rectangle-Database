@@ -38,7 +38,7 @@ app.get('/database/:name', async (req,res) => {
   try {
     const client = await pool.connect();
     const result = await client.query(`select * from rect where name='${name}'`)
-    const results = { 'results': (result) ? result.rows : null};
+    const results = {'results': (result) ? result.rows : null};
     res.render('pages/rectangle', results);
   } catch (err) {
     res.send("Error " + err);
@@ -57,7 +57,7 @@ app.post('/database/:name', async (req,res) => {
       res.send("Error " + err);
     }
   } else {
-    res.redirect('/edit');
+    res.redirect('/edit/:name');
   }
 })
 
@@ -78,8 +78,16 @@ app.post('/add', async (req,res) => {
   }
 })
 
-app.get('/edit', (req,res) => {
-  res.render('pages/edit');
+app.get('/edit/:name', async (req,res) => {
+  var name = req.params.name;
+  try {
+    const client = await pool.connect();
+    const result = await client.query(`select * from rect where name='${name}'`)
+    const results = {'results': (result) ? result.rows : null};
+    res.render('pages/edit', results);
+  } catch (err) {
+    res.send("Error " + err);
+  }
 })
 
 
