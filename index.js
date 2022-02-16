@@ -57,7 +57,7 @@ app.post('/database/:name', async (req,res) => {
       res.send("Error " + err);
     }
   } else {
-    res.redirect('/edit/:name');
+    res.redirect(`/edit/${name}`);
   }
 })
 
