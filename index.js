@@ -48,7 +48,7 @@ app.get('/database/:name', async (req,res) => {
 
 
 app.post('/database/:name', async (req,res) => {
-  var buttonValue = req.body.vote;
+  var buttonValue = req.body.button;
 
   if (buttonValue == "delete") {
     var name = req.params.name;
@@ -60,7 +60,7 @@ app.post('/database/:name', async (req,res) => {
       res.send("Error " + err);
     }
   } else {
-    res.redirect('/database');
+    res.redirect('/edit');
   }
 
   
@@ -82,6 +82,8 @@ app.post('/add', async (req,res) => {
     res.send("Error " + err);
   }
 })
+
+app.get('/edit', (req,res) => res.render('pages/edit'))
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
