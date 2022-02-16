@@ -13,9 +13,9 @@ table, th, td {
     border-color: rgb(42, 42, 42);
     border-radius: 3px;
     font-size: 15px;
-    padding: 5px;
+    padding: 8px;
     margin-top: 30px;
-    margin-left: 3px;
+    margin-left: 4px;
 }
 
 #formButton:hover {
