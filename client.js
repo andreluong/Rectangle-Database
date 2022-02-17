@@ -3,9 +3,6 @@ const res = require('express/lib/response');
 const { redirect } = require('express/lib/response');
 const path = require('path')
 const PORT = process.env.PORT || 5000
-
-var app = express()
-
 const { Pool } = require('pg');
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -13,6 +10,7 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 })
+var app = express()
   
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
@@ -21,6 +19,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => res.render('pages/home'))
+
 app.get('/database', async (req, res) => {
   try {
     const client = await pool.connect();
@@ -37,6 +36,7 @@ app.get('/database/:name', async (req,res) => {
   try {
     var name = req.params.name;
     var selectQuery = `select * from rect where name='${name}'`;
+
     const client = await pool.connect();
     const result = await client.query(selectQuery);
     const results = {'results': (result) ? result.rows : null};
@@ -50,10 +50,11 @@ app.get('/database/:name', async (req,res) => {
 app.post('/database/:name', async (req,res) => {
   var buttonValue = req.body.button;
   var name = req.params.name;
+
   if (buttonValue == "delete") {
     try {
       const client = await pool.connect();
-      client.query(`delete from rect where name='${name}'`);
+      await client.query(`delete from rect where name='${name}'`);
       res.redirect('/database');
       client.release();
     } catch (err) {
@@ -75,8 +76,8 @@ app.post('/add', async (req,res) => {
     var addQuery = `insert into rect values('${name}',${width},${height},'${colour}')`;
 
     const client = await pool.connect();
-    client.query(addQuery);
-    res.redirect('/database');
+    await client.query(addQuery);
+    res.redirect(`/edit/${name}`);
     client.release();
   } catch (err) {
     res.send(err);
@@ -87,6 +88,7 @@ app.get('/edit/:name', async (req,res) => {
   try {
     var name = req.params.name;
     var editQuery = `select * from rect where name='${name}'`;
+
     const client = await pool.connect();
     const result = await client.query(editQuery)
     const results = {'results': (result) ? result.rows : null};
