@@ -77,7 +77,7 @@ app.post('/add', async (req,res) => {
 
     const client = await pool.connect();
     await client.query(addQuery);
-    res.redirect(`/edit/${name}`);
+    res.redirect(`/database/${name}`);
     client.release();
   } catch (err) {
     res.send(err);
