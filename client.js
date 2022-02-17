@@ -41,6 +41,7 @@ app.get('/database/:name', async (req,res) => {
     const result = await client.query(selectQuery);
     const results = {'results': (result) ? result.rows : null};
     res.render('pages/rectangle', results);
+    client.release();
   } catch (err) {
     res.send("Error " + err);
   }
@@ -53,7 +54,8 @@ app.post('/database/:name', async (req,res) => {
     try {
       const client = await pool.connect();
       client.query(`delete from rect where name='${name}'`);
-      await res.redirect('/database');
+      res.redirect('/database');
+      client.release();
     } catch (err) {
       res.send("Error " + err);
     }
@@ -75,6 +77,7 @@ app.post('/add', async (req,res) => {
     const client = await pool.connect();
     client.query(addQuery);
     res.redirect('/database');
+    client.release();
   } catch (err) {
     res.send("Error " + err);
   }
@@ -88,6 +91,7 @@ app.get('/edit/:name', async (req,res) => {
     const result = await client.query(editQuery)
     const results = {'results': (result) ? result.rows : null};
     res.render('pages/edit', results);
+    client.release();
   } catch (err) {
     res.send("Error " + err);
   }
@@ -106,6 +110,7 @@ app.post('/edit/:name', async (req,res) => {
     const client = await pool.connect();
     await client.query(updateQuery);
     res.redirect('/database');
+    client.release();
   } catch (err) {
     res.send("Error " + err);
   }
