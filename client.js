@@ -104,7 +104,7 @@ app.post('/edit/:name', async (req,res) => {
       ,height=${height}, colour='${colour}' where name='${oldName}'`
 
     const client = await pool.connect();
-    client.query(updateQuery);
+    await client.query(updateQuery);
     res.redirect('/database');
   } catch (err) {
     res.send("Error " + err);
