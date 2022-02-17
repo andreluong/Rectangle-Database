@@ -29,7 +29,7 @@ app.get('/database', async (req, res) => {
     res.render('pages/db', results);
     client.release();
   } catch (err) {
-    res.send("Error " + err);
+    res.send(err);
   }
 })
 
@@ -43,7 +43,7 @@ app.get('/database/:name', async (req,res) => {
     res.render('pages/rectangle', results);
     client.release();
   } catch (err) {
-    res.send("Error " + err);
+    res.send(err);
   }
 })
 
@@ -57,7 +57,7 @@ app.post('/database/:name', async (req,res) => {
       res.redirect('/database');
       client.release();
     } catch (err) {
-      res.send("Error " + err);
+      res.send(err);
     }
   } else {
     res.redirect(`/edit/${name}`);
@@ -79,7 +79,7 @@ app.post('/add', async (req,res) => {
     res.redirect('/database');
     client.release();
   } catch (err) {
-    res.send("Error " + err);
+    res.send(err);
   }
 })
 
@@ -93,7 +93,7 @@ app.get('/edit/:name', async (req,res) => {
     res.render('pages/edit', results);
     client.release();
   } catch (err) {
-    res.send("Error " + err);
+    res.send(err);
   }
 })
 
@@ -112,7 +112,7 @@ app.post('/edit/:name', async (req,res) => {
     res.redirect('/database');
     client.release();
   } catch (err) {
-    res.send("Error " + err);
+    res.send(err);
   }
 })
 
