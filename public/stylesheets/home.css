@@ -34,3 +34,7 @@ button:hover {
 #content {
     margin-left: 30px;
 }
+
+p {
+    font-size: 15px;
+}
