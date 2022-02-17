@@ -1,24 +1,24 @@
 const express = require('express');
 const res = require('express/lib/response');
 const { redirect } = require('express/lib/response');
-const path = require('path')
-const PORT = process.env.PORT || 5000
+const path = require('path');
+const PORT = process.env.PORT || 5000;
 const { Pool } = require('pg');
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
     }
-})
-var app = express()
+});
+var app = express();
   
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => res.render('pages/home'))
+app.get('/', (req, res) => res.render('pages/home'));
 
 app.get('/database', async (req, res) => {
   try {
@@ -30,7 +30,7 @@ app.get('/database', async (req, res) => {
   } catch (err) {
     res.send(err);
   }
-})
+});
 
 app.get('/database/:name', async (req,res) => {
   try {
@@ -45,7 +45,7 @@ app.get('/database/:name', async (req,res) => {
   } catch (err) {
     res.send(err);
   }
-})
+});
 
 app.post('/database/:name', async (req,res) => {
   var buttonValue = req.body.button;
@@ -63,9 +63,9 @@ app.post('/database/:name', async (req,res) => {
   } else {
     res.redirect(`/edit/${name}`);
   }
-})
+});
 
-app.get('/add', (req,res) => res.render('pages/add'))
+app.get('/add', (req,res) => res.render('pages/add'));
 
 app.post('/add', async (req,res) => {
   try {
@@ -82,7 +82,7 @@ app.post('/add', async (req,res) => {
   } catch (err) {
     res.send(err);
   }
-})
+});
 
 app.get('/edit/:name', async (req,res) => {
   try {
@@ -97,7 +97,7 @@ app.get('/edit/:name', async (req,res) => {
   } catch (err) {
     res.send(err);
   }
-})
+});
 
 app.post('/edit/:name', async (req,res) => {
   try {
@@ -116,6 +116,6 @@ app.post('/edit/:name', async (req,res) => {
   } catch (err) {
     res.send(err);
   }
-})
+});
 
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
