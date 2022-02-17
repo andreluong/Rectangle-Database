@@ -53,7 +53,7 @@ app.post('/database/:name', async (req,res) => {
     try {
       const client = await pool.connect();
       client.query(`delete from rect where name='${name}'`);
-      res.redirect('/database');
+      await res.redirect('/database');
     } catch (err) {
       res.send("Error " + err);
     }
