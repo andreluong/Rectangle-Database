@@ -1,3 +1,8 @@
+:root {
+    --darkGrey: rgb(42, 42, 42);
+    --lightGrey: rgb(63, 63, 63);
+}
+
 html, body {
     padding: 0;
     margin: 0;
@@ -9,21 +14,21 @@ html, body {
 }
 
 #header {
-    background-color: rgb(42, 42, 42);
+    background-color: var(--darkGrey);
     width: 100%;
     padding: 10px;
 }
 
 button {
-    background-color: rgb(42, 42, 42);
+    border-color: var(--darkGrey);
+    background-color: var(--darkGrey);
     color: white;
-    border-color: rgb(42, 42, 42);
     font-size: 20px;
     padding: 10px;
 }
 
 button:hover {
-    background-color: rgb(63, 63, 63);
+    background-color: var(--lightGrey);
 }
 
 #content {
