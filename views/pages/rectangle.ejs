@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/home.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/rectangle.css">
-    <script src="../../client.js" defer></script>
-    <title>Rectangle</title>
-  </head>
-  <body id="container">
-    <div id="header">
-        <button onclick="window.location.href='/';">Home</button> 
-        <button onclick="window.location.href='/database';">Database</button> 
-        <button onclick="window.location.href='/add';">Add</button> 
-    </div>
-    <div id="content">
-        <h2>Rectangle</h2>
-        <svg>
-            <rect width="<%= results[0].width %>px" height="<%= results[0].height %>px"
-                fill="<%= results[0].colour %>"></rect>
-        </svg> 
-        <table>
-            <tr>
-                <th>Name</th>
-                <td><%= results[0].name%></td>
-            </tr>
-            <tr>
-                <th>Width</th>
-                <td><%= results[0].width%></td>
-            </tr>
-            <tr>
-                <th>Height</th>
-                <td><%= results[0].height%></td>
-            </tr>
-            <tr>
-                <th>Colour</th>
-                <td><%= results[0].colour%></td>
-            </tr>
-        </table>
-        <form method="post">
-            <button id="formButton" name="button" value="edit">Edit</button> 
-            <button id="formButton" name="button" value="delete">Delete</button> 
-        </form>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/home.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/rectangle.css">
+        <script src="../../client.js" defer></script>
+        <title>Rectangle</title>
+    </head>
+    <body id="container">
+        <div id="header">
+            <button onclick="window.location.href='/';">Home</button> 
+            <button onclick="window.location.href='/database';">Database</button> 
+            <button onclick="window.location.href='/add';">Add</button> 
+        </div>
+        <div id="content">
+            <h2>Rectangle</h2>
+            <svg>
+                <rect width="<%= results[0].width %>px" height="<%= results[0].height %>px"
+                    fill="<%= results[0].colour %>"></rect>
+            </svg> 
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <td><%= results[0].name%></td>
+                </tr>
+                <tr>
+                    <th>Width</th>
+                    <td><%= results[0].width%></td>
+                </tr>
+                <tr>
+                    <th>Height</th>
+                    <td><%= results[0].height%></td>
+                </tr>
+                <tr>
+                    <th>Colour</th>
+                    <td><%= results[0].colour%></td>
+                </tr>
+            </table>
+            <form method="post">
+                <button id="formButton" name="button" value="edit">Edit</button> 
+                <button id="formButton" name="button" value="delete">Delete</button> 
+            </form>
+        </div>
+    </body>
 </html>
