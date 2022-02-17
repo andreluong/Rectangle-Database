@@ -20,24 +20,25 @@ app.use(express.urlencoded({extended:false}))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => res.render('pages/index'))
+app.get('/', (req, res) => res.render('pages/home'))
 app.get('/database', async (req, res) => {
-    try {
-      const client = await pool.connect();
-      const result = await client.query(`select * from rect`);
-      const results = { 'results': (result) ? result.rows : null};
-      res.render('pages/db', results);
-      client.release();
-    } catch (err) {
-      res.send("Error " + err);
-    }
+  try {
+    const client = await pool.connect();
+    const result = await client.query(`select * from rect`);
+    const results = { 'results': (result) ? result.rows : null};
+    res.render('pages/db', results);
+    client.release();
+  } catch (err) {
+    res.send("Error " + err);
+  }
 })
 
 app.get('/database/:name', async (req,res) => {
-  var name = req.params.name;
   try {
+    var name = req.params.name;
+    var selectQuery = `select * from rect where name='${name}'`;
     const client = await pool.connect();
-    const result = await client.query(`select * from rect where name='${name}'`)
+    const result = await client.query(selectQuery);
     const results = {'results': (result) ? result.rows : null};
     res.render('pages/rectangle', results);
   } catch (err) {
@@ -64,14 +65,15 @@ app.post('/database/:name', async (req,res) => {
 app.get('/add', (req,res) => res.render('pages/add'))
 
 app.post('/add', async (req,res) => {
-  var name = req.body.name;
-  var width = req.body.width;
-  var height = req.body.height;
-  var colour = req.body.colour;
-
   try {
+    var name = req.body.name;
+    var width = req.body.width;
+    var height = req.body.height;
+    var colour = req.body.colour;
+    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}')`;
+
     const client = await pool.connect();
-    client.query(`insert into rect values('${name}',${width},${height},'${colour}')`);
+    client.query(addQuery);
     res.redirect('/database');
   } catch (err) {
     res.send("Error " + err);
@@ -81,15 +83,15 @@ app.post('/add', async (req,res) => {
 app.get('/edit/:name', async (req,res) => {
   try {
     var name = req.params.name;
+    var editQuery = `select * from rect where name='${name}'`;
     const client = await pool.connect();
-    const result = await client.query(`select * from rect where name='${name}'`)
+    const result = await client.query(editQuery)
     const results = {'results': (result) ? result.rows : null};
     res.render('pages/edit', results);
   } catch (err) {
     res.send("Error " + err);
   }
 })
-
 
 app.post('/edit/:name', async (req,res) => {
   try {
@@ -98,16 +100,15 @@ app.post('/edit/:name', async (req,res) => {
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
+    var updateQuery = `update rect set name='${name}', width=${width}
+      ,height=${height}, colour='${colour}' where name='${oldName}'`
 
     const client = await pool.connect();
-    const updateQuery = `update rect set name='${name}', width=${width},
-      height=${height}, colour='${colour}' where name='${oldName}'`
-    await client.query(updateQuery);
+    client.query(updateQuery);
     res.redirect('/database');
   } catch (err) {
     res.send("Error " + err);
   }
 })
-
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))

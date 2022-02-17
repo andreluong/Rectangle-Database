@@ -5,20 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
         <link rel="stylesheet" type="text/css" href="/stylesheets/add.css">
-        <script src="../../index.js" defer></script>
+        <script src="../../client.js" defer></script>
         <title>Edit Rectangle</title>
     </head>
-
     <body id="container">
         <div id="header">
             <button onclick="window.location.href='/';">Home</button> 
             <button onclick="window.location.href='/database';">Database</button> 
             <button onclick="window.location.href='/add';">Add</button> 
         </div>
-    
         <div id="content">
              <h2>Edit Rectangle</h2>
-
             <form id="form" method="post">    
                 <label for="name">Name:</label><br>
                 <input type="text" name="name" value="<%= results[0].name%>"><br>

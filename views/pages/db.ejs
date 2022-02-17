@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/db.css">
-    <script src="../../index.js" defer></script>
+    <script src="../../client.js" defer></script>
     <title>Rectangle Database</title>
   </head>
-
   <body id="container">
-    
     <div id="header">
       <button onclick="window.location.href='/';">Home</button> 
       <button onclick="window.location.href='/database';">Database</button> 
       <button onclick="window.location.href='/add';">Add</button> 
     </div>
-
     <div id="content">
       <h2>Database</h2>
       <table>
@@ -25,7 +22,6 @@
           <th>Name</th>
           <th>Colour</th>
         </tr>
-
         <% for (var i = 0; i < results.length; i++) { %>
           <tr>
             <td><%= i+1%></td>
@@ -35,10 +31,7 @@
             <td><%= results[i].colour %></td>
           </tr>
         <% } %>
-
       </table>
-
     </div>
-
   </body>
 </html>
