@@ -36,7 +36,7 @@ app.get('/database', async (req, res) => {
 app.get('/database/:id', async (req,res) => {
   try {
     var id = req.params.id;
-    var selectQuery = `select * from rect where id='${id}'`;
+    var selectQuery = `select * from rect where id=${id}`;
 
     const client = await pool.connect();
     const result = await client.query(selectQuery);
