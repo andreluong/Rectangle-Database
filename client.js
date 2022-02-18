@@ -32,10 +32,10 @@ app.get('/database', async (req, res) => {
   }
 });
 
-app.get('/database/:name', async (req,res) => {
+app.get('/database/:id', async (req,res) => {
   try {
-    var name = req.params.name;
-    var selectQuery = `select * from rect where name='${name}'`;
+    var id = req.params.id;
+    var selectQuery = `select * from rect where id='${id}'`;
 
     const client = await pool.connect();
     const result = await client.query(selectQuery);
@@ -47,14 +47,14 @@ app.get('/database/:name', async (req,res) => {
   }
 });
 
-app.post('/database/:name', async (req,res) => {
+app.post('/database/:id', async (req,res) => {
   var buttonValue = req.body.button;
-  var name = req.params.name;
+  var id = req.params.id;
 
   if (buttonValue == "delete") {
     try {
       const client = await pool.connect();
-      await client.query(`delete from rect where name='${name}'`);
+      await client.query(`delete from rect where id='${id}'`);
       res.redirect('/database');
       client.release();
     } catch (err) {
@@ -73,21 +73,22 @@ app.post('/add', async (req,res) => {
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
-    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}')`;
+    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}', DEFAULT)`;
 
     const client = await pool.connect();
     await client.query(addQuery);
-    res.redirect(`/database/${name}`);
+    index++;
+    res.redirect(`/database/`);
     client.release();
   } catch (err) {
     res.send(err);
   }
 });
 
-app.get('/edit/:name', async (req,res) => {
+app.get('/edit/:id', async (req,res) => {
   try {
-    var name = req.params.name;
-    var editQuery = `select * from rect where name='${name}'`;
+    var id = req.params.id;
+    var editQuery = `select * from rect where name='${id}'`;
 
     const client = await pool.connect();
     const result = await client.query(editQuery)
@@ -99,19 +100,20 @@ app.get('/edit/:name', async (req,res) => {
   }
 });
 
-app.post('/edit/:name', async (req,res) => {
+app.post('/edit/:id', async (req,res) => {
   try {
-    var oldName = req.params.name;
+    var oldId = req.params.id;
+    var newId = DEFAULT;
     var name = req.body.name;
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
     var updateQuery = `update rect set name='${name}', width=${width}
-      ,height=${height}, colour='${colour}' where name='${oldName}'`
+      ,height=${height}, colour='${colour}' id=${newId} where id=${oldId}`
 
     const client = await pool.connect();
     await client.query(updateQuery);
-    res.redirect(`/database/${name}`);
+    res.redirect(`/database/${oldId}`);
     client.release();
   } catch (err) {
     res.send(err);

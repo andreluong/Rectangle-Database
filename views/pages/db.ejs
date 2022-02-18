@@ -24,10 +24,10 @@
         </tr>
         <% for (var i = 0; i < results.length; i++) { %>
           <tr>
-            <td><%= i+1%></td>
             <td>
-              <a href ="/database/<%= results[i].name%>"><%= results[i].name %></a>
+              <a href ="/database/<%= results[i].id%>"><%= results[i].id%></a>
             </td>
+            <td><%= results[i].name %></td>
             <td><%= results[i].colour %></td>
           </tr>
         <% } %>
