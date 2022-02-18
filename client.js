@@ -78,7 +78,7 @@ app.post('/add', async (req,res) => {
     const client = await pool.connect();
     await client.query(addQuery);
     index++;
-    res.redirect(`/database/`);
+    res.redirect(`/database`);
     client.release();
   } catch (err) {
     res.send(err);
