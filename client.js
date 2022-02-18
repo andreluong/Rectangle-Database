@@ -88,7 +88,7 @@ app.post('/add', async (req,res) => {
 app.get('/edit/:id', async (req,res) => {
   try {
     var id = req.params.id;
-    var editQuery = `select * from rect where id='${id}'`;
+    var editQuery = `select * from rect where id=${id}`;
 
     const client = await pool.connect();
     const result = await client.query(editQuery)
