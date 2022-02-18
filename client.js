@@ -73,7 +73,7 @@ app.post('/add', async (req,res) => {
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
-    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}', DEFAULT)`;
+    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}', ${DEFAULT})`;
 
     const client = await pool.connect();
     await client.query(addQuery);
