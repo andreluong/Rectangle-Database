@@ -10,6 +10,7 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 });
+var index = 1;
 var app = express();
   
 app.use(express.static(path.join(__dirname, 'public')));
@@ -73,8 +74,7 @@ app.post('/add', async (req,res) => {
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
-    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}', ${DEFAULT})`;
-
+    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}', ${index})`;
     const client = await pool.connect();
     await client.query(addQuery);
     index++;
