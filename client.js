@@ -10,7 +10,6 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 });
-var index = 1;
 var app = express();
   
 app.use(express.static(path.join(__dirname, 'public')));
@@ -74,10 +73,9 @@ app.post('/add', async (req,res) => {
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
-    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}', ${index})`;
+    var addQuery = `insert into rect values('${name}',${width},${height},'${colour}', DEFAULT)`;
     const client = await pool.connect();
     await client.query(addQuery);
-    index++;
     res.redirect('/database');
     client.release();
   } catch (err) {
@@ -103,17 +101,16 @@ app.get('/edit/:id', async (req,res) => {
 app.post('/edit/:id', async (req,res) => {
   try {
     var oldId = req.params.id;
-    var newId = index;
+    var newId = DEFAULT;
     var name = req.body.name;
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
     var updateQuery = `update rect set name='${name}', width=${width}
-      ,height=${height}, colour='${colour}' id=${newId} where id=${oldId}`
+      ,height=${height}, colour='${colour}' id=${newId} where id=${oldId}}`
 
     const client = await pool.connect();
     await client.query(updateQuery);
-    index++;
     res.redirect(`/database/${newId}`);
     client.release();
   } catch (err) {
