@@ -114,7 +114,7 @@ app.post('/edit/:id', async (req,res) => {
     const client = await pool.connect();
     await client.query(updateQuery);
     index++;
-    res.redirect(`/database/${oldId}`);
+    res.redirect(`/database/${newId}`);
     client.release();
   } catch (err) {
     res.send(err);
