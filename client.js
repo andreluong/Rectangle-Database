@@ -55,14 +55,14 @@ app.post('/database/:id', async (req,res) => {
   if (buttonValue == "delete") {
     try {
       const client = await pool.connect();
-      await client.query(`delete from rect where id='${id}'`);
+      await client.query(`delete from rect where id=${id}`);
       res.redirect('/database');
       client.release();
     } catch (err) {
       res.send(err);
     }
   } else {
-    res.redirect(`/edit/${name}`);
+    res.redirect(`/edit/${id}`);
   }
 });
 
@@ -78,7 +78,7 @@ app.post('/add', async (req,res) => {
     const client = await pool.connect();
     await client.query(addQuery);
     index++;
-    res.redirect(`/database`);
+    res.redirect('/database');
     client.release();
   } catch (err) {
     res.send(err);
