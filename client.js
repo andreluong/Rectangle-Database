@@ -88,7 +88,7 @@ app.post('/add', async (req,res) => {
 app.get('/edit/:id', async (req,res) => {
   try {
     var id = req.params.id;
-    var editQuery = `select * from rect where name='${id}'`;
+    var editQuery = `select * from rect where id='${id}'`;
 
     const client = await pool.connect();
     const result = await client.query(editQuery)
@@ -103,7 +103,7 @@ app.get('/edit/:id', async (req,res) => {
 app.post('/edit/:id', async (req,res) => {
   try {
     var oldId = req.params.id;
-    var newId = DEFAULT;
+    var newId = index;
     var name = req.body.name;
     var width = req.body.width;
     var height = req.body.height;
@@ -113,6 +113,7 @@ app.post('/edit/:id', async (req,res) => {
 
     const client = await pool.connect();
     await client.query(updateQuery);
+    index++;
     res.redirect(`/database/${oldId}`);
     client.release();
   } catch (err) {
