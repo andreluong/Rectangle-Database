@@ -101,17 +101,16 @@ app.get('/edit/:id', async (req,res) => {
 app.post('/edit/:id', async (req,res) => {
   try {
     var oldId = req.params.id;
-    var newId = DEFAULT;
     var name = req.body.name;
     var width = req.body.width;
     var height = req.body.height;
     var colour = req.body.colour;
     var updateQuery = `update rect set name='${name}', width=${width}
-      ,height=${height}, colour='${colour}' id=${newId} where id=${oldId}}`
+      ,height=${height}, colour='${colour}', id=DEFAULT where id=${oldId}}`
 
     const client = await pool.connect();
     await client.query(updateQuery);
-    res.redirect(`/database/${newId}`);
+    res.redirect('/database');
     client.release();
   } catch (err) {
     res.send(err);
