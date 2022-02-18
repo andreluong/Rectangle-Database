@@ -106,7 +106,7 @@ app.post('/edit/:id', async (req,res) => {
     var height = req.body.height;
     var colour = req.body.colour;
     var updateQuery = `update rect set name='${name}', width=${width}
-      ,height=${height}, colour='${colour}', id=DEFAULT where id=${oldId}}`
+      ,height=${height}, colour='${colour}', id=DEFAULT where id=${oldId}`
 
     const client = await pool.connect();
     await client.query(updateQuery);
